@@ -551,7 +551,9 @@ Ext.define('Ext.ux.TouchCalendarView', {
 	isOutsideMinMax: function(date){
 		var outside = false;
 		
-		if(this.getViewMode() === 'MONTH'){
+		if(this.getViewMode() === 'YEAR'){
+			outside = date.getUTCFullYear() < 2014;
+		} else if(this.getViewMode() === 'MONTH'){
 			outside = ((this.minDate && Ext.Date.getLastDateOfMonth(date) < this.minDate) || (this.maxDate && Ext.Date.getFirstDateOfMonth(date) > this.maxDate));
 		} else {
 			outside = ((this.minDate && this.getWeekendDate(date) < this.minDate) || (this.maxDate && this.getStartDate(date) > this.maxDate));
@@ -804,6 +806,94 @@ Ext.define('Ext.ux.TouchCalendarView', {
 	},
 	
 	statics: {
+		YEAR: {
+			dateAttributeFormat: 'd-m-Y',
+
+			/**
+			 * Called during the View's Store population. This calculates the next date for the current period.
+			 * The YEAR mode's version just adds 1 (or 0 on the first iteration) to the specified date.
+			 * @param {Date} d Current Iteration date
+			 * @param {Number} index
+			 */
+			getNextIterationDate: function(d, index){
+				return new Date(d.getFullYear(), d.getMonth()+ (index===0?0:1), d.getDate());
+			},
+
+			/**
+			 * Returns the total number of days to be shown in this view.
+			 * @method
+			 * @private
+			 * @param {Date} date
+			 */
+			getTotalDays: function(date){
+				//return 365 + Ext.Date.isLeapYear(date) ? 1 : 0;
+				return 12;
+			},
+
+			/**
+			 * Returns the first day that should be visible for a year view
+			 * @method
+			 * @private
+			 * @param {Date} date
+			 * @return {Date}
+			 */
+			getStartDate: function(date){
+				return new Date(date.getFullYear(), 0, 1);
+			},
+
+			/**
+			 * Returns a new date based on the date passed and the delta value for YEAR view.
+			 * @method
+			 * @private
+			 * @param {Date} date
+			 * @param {Number} delta
+			 * @return {Date}
+			 */
+			getDeltaDate: function(date, delta){
+				var newYear = date.getFullYear() + delta,
+					newDate = new Date(newYear, 0, 1);
+				return newDate;
+			},
+
+			periodRowDayCount: 90,
+			periodMonthCount: 3,
+			numberOfEventsPerMonth: 4,
+
+			tpl: [
+				'<table class="{[this.me.getViewMode().toLowerCase()]}">',
+					'<thead>',
+						'<tr>',
+							'<th class="year {[this.me.getPrevPeriodCls()]}" style="display: block;"></th>',
+							'<th><span class="YearTitle">{[Ext.Date.format(values[0].date, "Y")]}</span></th>',
+							'<th class="year {[this.me.getNextPeriodCls()]}" style="display: block;"></th>',
+						'</tr>',
+					'</thead>',
+					'<tbody>',
+				'<tpl for=".">',
+					'<tpl if="xindex % 3 === 1">',
+						'<tr class="time-block-row quarter{[Math.floor(xindex / 3) + 1]}">',
+					'</tpl>',
+					'<td datetime="{[this.me.getDateAttribute(values.date)]}">',
+						'<table>',
+							'<thead>',
+								'<tr><th>{[Ext.Date.format(values.date, "M")]}</th></tr></tr>',
+							'</thead>',
+							'<tbody>',
+								//'<tr><td>TEST-1</td></tr>',
+								//'<tr><td>TEST-2</td></tr>',
+								//'<tr><td>TEST-3</td></tr>',
+								//'<tr><td>TEST-4</td></tr>',
+							'</tbody>',
+						'</table>',
+					'</td>',
+					'<tpl if="xindex % 3 === 0">',
+						'</tr>',
+					'</tpl>',
+				'</tpl>',
+					'</tbody>',
+				'</table>'
+			]
+		},
 		
 		MONTH: {
 				

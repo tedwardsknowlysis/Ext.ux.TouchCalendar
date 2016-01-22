@@ -29,53 +29,36 @@ var day = (new Date()).getDate(),
 
 var eventStore = Ext.create('Ext.data.Store', {
     model: 'Event',
-    data: [{
-        event: '8.03 - 8:05',
-        title: 'Event Name 1',
-        start: new Date(year, month, day, 8, 3),
-        end: new Date(year, month, day, 8, 5),
-	    css: 'red'
-    }, {
-        event: '7:00 - 7:05',
-	    title: 'Event Name 2',
-        start: new Date(year, month, day, 7, 0),
-        end: new Date(year, month, day, 7, 5),
-	    css: 'blue'
-    }, {
-        event: '7:00 - 7:10',
-	    title: 'Event Name 3',
-        start: new Date(year, month, day, 7, 0),
-        end: new Date(year, month, day, 7, 10),
-	    css: 'green'
-    }, {
-        event: '7:06 - 7:15',
-	    title: 'Event Name 4',
-        start: new Date(year, month, day, 7, 6),
-        end: new Date(year, month, day, 7, 15),
-	    css: 'green'
-    }, {
-        event: '19.00 - 20:30',
-        title: 'Event Name 5',
-        start: new Date(year, month, day-2, 19, 0),
-        end: new Date(year, month, day-2, 20, 30),
-	    css: 'blue'
-    }, {
-        event: '13:15 - 14:05',
-	    title: 'Event Name 6',
-        start: new Date(year, month, day-11, 13, 15),
-        end: new Date(year, month, day-11, 14, 5),
-	    css: 'blue'
-    }, {
-        event: '15:00 - 16:10',
-	    title: 'Event Name 7',
-        start: new Date(year, month, day+2, 15, 0),
-        end: new Date(year, month, day+2, 16, 10),
-	    css: 'green'
-    }, {
-        event: '00:00 - 00:00',
-	    title: 'Event Name 8',
-        start: new Date(year, month, day+6, 0, 0),
-        end: new Date(year, month, day+7, 0, 0),
-	    css: 'red'
-    }]
+	data: [
+		{
+			event: '1:05am - 3:05am',
+			title: 'Event 1',
+			start: new Date(year, 0, 1, 1, 5),
+			end: new Date(year, 0, 1, 3, 5),
+			css: 'red'
+		}, {
+			event: '4:00 - 4:10',
+			title: 'Event Name 3',
+			start: new Date(year, month, day, 4, 0),
+			end: new Date(year, month, day, 4, 10),
+			css: 'green'
+		}, {
+			event: '7:06 - 7:15',
+			title: 'Event Name 4',
+			start: new Date(year, month, day, 7, 6),
+			end: new Date(year, month, day, 7, 15),
+			css: 'blue'
+		}, {
+			event: 'Jan - Nov',
+			title: 'Event Name 7',
+			start: new Date(year, month, day+2, 15, 0),
+			end: new Date(year, month+10, day+2, 16, 10),
+			css: 'green'
+		}, {
+			event: 'Jun - Sept',
+			title: 'Event Name 8',
+			start: new Date(year, month+5, day+6, 0, 0),
+			end: new Date(year, month+8, day+9, 0, 0),
+			css: 'red'
+		}]
 });

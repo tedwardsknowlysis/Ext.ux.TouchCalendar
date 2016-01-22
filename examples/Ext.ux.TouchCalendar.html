@@ -32,6 +32,13 @@
                         docked: 'top',
                         items: [{
                             xtype: 'button',
+                            text: 'Year View',
+                            handler: function(){
+                                calendar.setViewMode('year');
+                            }
+                        },
+                            {
+                            xtype: 'button',
                             text: 'Month View',
                             handler: function(){
                                 calendar.setViewMode('month');

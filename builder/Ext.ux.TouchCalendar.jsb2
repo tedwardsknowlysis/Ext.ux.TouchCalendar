@@ -35,6 +35,10 @@
                     "path": "../Ext.ux.TouchCalendarEvents/"
                 },
                 {
+                    "text": "Ext.ux.TouchCalendarYearEvents.js",
+                    "path": "../Ext.ux.TouchCalendarEvents/"
+                },
+                {
                     "text": "Ext.ux.TouchCalendarEvents.js",
                     "path": "../Ext.ux.TouchCalendarEvents/"
                 },

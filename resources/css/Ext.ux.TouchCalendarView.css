@@ -7762,11 +7762,13 @@ body.x-desktop {
   background: url(../images/larr.png) center center no-repeat;
   cursor: pointer;
 }
+
 /* line 167, ../scss/Ext.ux.TouchCalendarView.scss */
 .touch-calendar-view thead th:last-child {
   background: url(../images/rarr.png) center center no-repeat;
   cursor: pointer;
 }
+
 /* line 173, ../scss/Ext.ux.TouchCalendarView.scss */
 .touch-calendar-view thead th span {
   font-size: 20px;
@@ -7780,6 +7782,13 @@ body.x-desktop {
   z-index: 999;
   text-shadow: white 1px 1px 1px;
 }
+.touch-calendar-view table.year > thead > th {
+  vertical-align: middle;
+}
+.touch-calendar-view thead th span.YearTitle {
+  position: inherit;
+}
+
 /* line 195, ../scss/Ext.ux.TouchCalendarView.scss */
 .touch-calendar-view .day thead th:first-child {
   background: url(../images/larr.png) 15px center no-repeat;
@@ -7788,4 +7797,20 @@ body.x-desktop {
 .touch-calendar-view .day thead th:last-child {
   background: url(../images/rarr.png) right center no-repeat;
   margin-right: 15px;
+}
+
+.time-block-row table thead th {
+  height: 20px;
+}
+
+.time-block-row table thead th:last-child {
+  background: inherit;
+}
+
+.time-block-row table {
+  height: 100%;
+}
+
+.time-block-row table tr {
+  height: 25%;
 }

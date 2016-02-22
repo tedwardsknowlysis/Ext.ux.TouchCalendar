@@ -22,7 +22,7 @@ Ext.define('Ext.ux.TouchCalendarEventsBase', {
 		 * This is required to be configurable because Month/Week modes work from bottom to top, whereas Day view works from left to right so we want the ordering to be different.
 		 * Default to 'DESC' for the Month and Week views.
 		 */
-		eventSortDirection: 'DESC'
+		eventSortDirection: 'ASC'
 	},
 
 	constructor: function(config){
@@ -89,19 +89,24 @@ Ext.define('Ext.ux.TouchCalendarEventsBase', {
 						eventBarRecord = eventBarRecord.linked().getAt(eventBarRecord.linked().getCount() - 1);
 					}
 
+					var barPos = eventBarRecord.get('BarPosition');
+
 					// if currentDate is at the start of the week then we must create a new EventBarRecord
 					// to represent the new bar on the next row.
-					if (currentDate.getDay() === this.getCalendar().getWeekStart()) {
+					if (   (currentDate.getDay() === this.getCalendar().getWeekStart() && !(this.getCalendar().getViewMode() === 'YEAR'))
+						|| (this.getCalendar().getViewMode() === 'YEAR' && currentDate.getMonth() % 3 === 0)
+						|| eventBarRecord.get('BarPosition') >= this.getPlugin().getMaxVisibleEvents()) {
 						// push the inherited BarPosition of the parent
 						// EventBarRecord onto the takenDatePositions array
-						takenDatePositions.push(eventBarRecord.get('BarPosition'));
+						barPos = this.getNextFreePosition(takenDatePositions);
+						takenDatePositions.push(barPos);
 
 						// create a new EventBar record
 						var wrappedEventBarRecord = Ext.create('Ext.ux.CalendarEventBarModel', {
 							EventID: event.internalId,
 							Date: currentDate,
 							BarLength: 1,
-							BarPosition: eventBarRecord.get('BarPosition'),
+							BarPosition: barPos,
 							Colour: eventBarRecord.get('Colour'),
 							Record: event
 						});
@@ -111,7 +116,7 @@ Ext.define('Ext.ux.TouchCalendarEventsBase', {
 					}
 					else {
 						// add the inherited BarPosition to the takenDatePositions array
-						takenDatePositions.push(eventBarRecord.get('BarPosition'));
+						takenDatePositions.push(barPos);
 
 						// increment the BarLength value for this day
 						eventBarRecord.set('BarLength', eventBarRecord.get('BarLength') + 1);

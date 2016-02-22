@@ -24,12 +24,10 @@
                     "text": "Ext.ux.TouchCalendarDayEvents.js",
                     "path": "../Ext.ux.TouchCalendarEvents/"
                 },
-
                 {
                     "text": "Ext.ux.TouchCalendarMonthEvents.js",
                     "path": "../Ext.ux.TouchCalendarEvents/"
                 },
-
                 {
                     "text": "Ext.ux.TouchCalendarWeekEvents.js",
                     "path": "../Ext.ux.TouchCalendarEvents/"

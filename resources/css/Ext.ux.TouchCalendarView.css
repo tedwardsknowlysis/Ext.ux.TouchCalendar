@@ -3865,15 +3865,15 @@ input[type="search"]::-webkit-search-cancel-button {
   min-height: 100%;
   height: auto !important;
   width: auto !important;
-  		/*
-  		&.x-scroll-scroller-vertical {
-  			height: auto !important;
-  		}
-  
-  		&.x-scroll-scroller-horizontal {
-  			width: auto !important;
-  		}
-  		*/
+  /*
+  &.x-scroll-scroller-vertical {
+      height: auto !important;
+  }
+
+  &.x-scroll-scroller-horizontal {
+      width: auto !important;
+  }
+  */
 }
 
 /* line 36, ../../lib/sencha/resources/themes/stylesheets/sencha-touch/base/src/scroller/_Scroller.scss */
@@ -7678,56 +7678,6 @@ body.x-desktop {
   text-align: right;
   font-size: 0.7em;
 }
-/* line 97, ../scss/Ext.ux.TouchCalendarView.scss */
-.touch-calendar-view td.today {
-  color: #FFFFFF;
-  text-shadow: #333 1px 1px 2px;
-  -webkit-box-shadow: inset 0px 0px 8px #000;
-  border: 1px solid black;
-  background: #7188a8;
-  background-image: none;
-  background-color: #44566f;
-  background-image: -webkit-linear-gradient(top, #313d4f, #3a4a5f 10%, #44566f 65%, #455771);
-  background-image: -moz-linear-gradient(top, #313d4f, #3a4a5f 10%, #44566f 65%, #455771);
-  background-image: -o-linear-gradient(top, #313d4f, #3a4a5f 10%, #44566f 65%, #455771);
-  background-image: -ms-linear-gradient(top, #313d4f, #3a4a5f 10%, #44566f 65%, #455771);
-}
-/* line 108, ../scss/Ext.ux.TouchCalendarView.scss */
-.touch-calendar-view td.unselectable {
-  color: #89909A;
-  background-image: none;
-  background-color: #cda3a8;
-  background-image: -webkit-linear-gradient(top, #bb8289, #c49399 10%, #cda3a8 65%, #cea5aa);
-  background-image: -moz-linear-gradient(top, #bb8289, #c49399 10%, #cda3a8 65%, #cea5aa);
-  background-image: -o-linear-gradient(top, #bb8289, #c49399 10%, #cda3a8 65%, #cea5aa);
-  background-image: -ms-linear-gradient(top, #bb8289, #c49399 10%, #cda3a8 65%, #cea5aa);
-}
-/* line 114, ../scss/Ext.ux.TouchCalendarView.scss */
-.touch-calendar-view td.selected {
-  color: #FFFFFF;
-  text-shadow: #333 1px 1px 0px;
-  border: 1px solid black;
-  background: #1980e5;
-  background-image: none;
-  background-color: #4699eb;
-  background-image: -webkit-linear-gradient(top, #8bbff2, #5da6ed 50%, #4699eb 51%, #2f8de8);
-  background-image: -moz-linear-gradient(top, #8bbff2, #5da6ed 50%, #4699eb 51%, #2f8de8);
-  background-image: -o-linear-gradient(top, #8bbff2, #5da6ed 50%, #4699eb 51%, #2f8de8);
-  background-image: -ms-linear-gradient(top, #8bbff2, #5da6ed 50%, #4699eb 51%, #2f8de8);
-}
-/* line 124, ../scss/Ext.ux.TouchCalendarView.scss */
-.touch-calendar-view td.today.selected {
-  color: #FFFFFF;
-  text-shadow: #333 1px 1px 2px;
-  border: 1px solid black;
-  background: #1980e5;
-  background-image: none;
-  background-color: #0f4d89;
-  background-image: -webkit-linear-gradient(top, #0a335b, #0c4072 10%, #0f4d89 65%, #0f4e8b);
-  background-image: -moz-linear-gradient(top, #0a335b, #0c4072 10%, #0f4d89 65%, #0f4e8b);
-  background-image: -o-linear-gradient(top, #0a335b, #0c4072 10%, #0f4d89 65%, #0f4e8b);
-  background-image: -ms-linear-gradient(top, #0a335b, #0c4072 10%, #0f4d89 65%, #0f4e8b);
-}
 /* line 134, ../scss/Ext.ux.TouchCalendarView.scss */
 .touch-calendar-view td.prev-month, .touch-calendar-view td.next-month {
   color: #89909A;
@@ -7747,16 +7697,13 @@ body.x-desktop {
 }
 /* line 149, ../scss/Ext.ux.TouchCalendarView.scss */
 .touch-calendar-view thead th {
-  font-size: 9px;
   vertical-align: bottom;
   padding-bottom: 3px;
-  color: #3F4E5E;
   text-align: center;
   height: 46px;
-  text-shadow: white 1px 1px 1px;
-  font-weight: bold;
   border-bottom: 1px solid #a3a7af;
 }
+
 /* line 161, ../scss/Ext.ux.TouchCalendarView.scss */
 .touch-calendar-view thead th:first-child {
   background: url(../images/larr.png) center center no-repeat;
@@ -7770,7 +7717,7 @@ body.x-desktop {
 }
 
 /* line 173, ../scss/Ext.ux.TouchCalendarView.scss */
-.touch-calendar-view thead th span {
+.touch-calendar-view thead th > span {
   font-size: 20px;
   font-weight: bold;
   height: 30px;

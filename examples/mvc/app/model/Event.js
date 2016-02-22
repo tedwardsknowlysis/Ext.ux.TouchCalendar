@@ -9,7 +9,12 @@ Ext.define('TouchCalendar.model.Event', {
 		fields: [{
 			name: 'event',
 			type: 'string'
-		}, {
+		},
+			{
+				name: 'title',
+				type: 'string'
+			},
+			{
 			name: 'weight',
 			type: 'float'
 		},  {

@@ -2,7 +2,6 @@
  * Ext.ux.TouchCalendarMonthEvents
  */
 Ext.define('Ext.ux.TouchCalendarMonthEvents', {
-
     extend: 'Ext.ux.TouchCalendarEventsBase',
 
 	eventFilterFn: function(record, id, currentDateTime){

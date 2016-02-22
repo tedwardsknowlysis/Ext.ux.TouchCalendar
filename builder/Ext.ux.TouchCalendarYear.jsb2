@@ -1,0 +1,45 @@
+{
+    "projectName": "Ext.ux.TouchCalendarYear",
+    "deployDir": "min",
+    "licenseText": "Ext.ux.TouchCalendarYear",
+    "pkgs": [
+        {
+            "name": "Ext.ux.TouchCalendarYear",
+            "file": "Ext.ux.TouchCalendarYear-min.js",
+            "isDebug": false,
+            "fileIncludes": [
+                {
+					"text": "Ext.ux.TouchCalendar.js",
+                    "path": "../"
+				},
+				{
+					"text": "Ext.ux.TouchCalendarView.js",
+                    "path": "../"
+				},
+                {
+                    "text": "Ext.ux.TouchCalendarEventsBase.js",
+                    "path": "../Ext.ux.TouchCalendarEvents/"
+                },
+                {
+                    "text": "Ext.ux.TouchCalendarYearEvents.js",
+                    "path": "../Ext.ux.TouchCalendarEvents/"
+                },
+                {
+                  "text": "Ext.ux.TouchCalendarMonthEvents.js",
+                  "path": "../Ext.ux.TouchCalendarEvents/"
+                },
+                {
+                    "text": "Ext.ux.TouchCalendarEvents.js",
+                    "path": "../Ext.ux.TouchCalendarEvents/"
+                },
+				{
+					"text": "Ext.ux.TouchCalendarSimpleEvents.js",
+                    "path": "../Ext.ux.TouchCalendarSimpleEvents/"
+				}
+            ] 
+        } 
+    ],
+    "resources": [
+        
+    ]
+}

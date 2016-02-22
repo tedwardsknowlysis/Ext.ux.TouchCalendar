@@ -74,6 +74,25 @@
   text-shadow: none;
   color: #3F4E5E;
 }
+/* line 117, ../scss/skin1.scss */
+.touch-calendar-view tbody td.unselectable {
+  color: #EEE;
+  background-image: none;
+}
+/* line 123, ../scss/skin1.scss */
+.touch-calendar-view tbody td.selected {
+  background: none;
+  background-color: #E0E0E0;
+  border: 1px solid #999;
+  text-shadow: none;
+  color: #3F4E5E;
+}
+/* line 132, ../scss/skin1.scss */
+.touch-calendar-view tbody td.today.selected {
+  background: none;
+  background-color: #E0E0E0;
+  color: white;
+}
 /* line 141, ../scss/skin1.scss */
 .touch-calendar-view thead {
   background-color: white;
@@ -84,8 +103,10 @@
   border-bottom: none;
 }
 /* line 160, ../scss/skin1.scss */
-.touch-calendar-view thead th > span {
+.touch-calendar-view thead th span {
   font-weight: normal;
   top: 10px;
+  left: 25%;
   color: #666;
+  width: 50%;
 }

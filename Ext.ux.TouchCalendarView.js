@@ -13,7 +13,7 @@
  *
  */
 Ext.define('Ext.ux.TouchCalendarView', {
-	
+	xtype: 'TouchCalendarView',
 	extend: 'Ext.Container',
 
 	alias: 'widget.touchcalendarview',
@@ -100,6 +100,7 @@ Ext.define('Ext.ux.TouchCalendarView', {
 	     * events to render onto the calendar. The Model used in this store should have at the least a Start Date and End Date field
 	     * that can be customised from the default values using the 'startEventField' and 'endEventField' config options of the Event plugin.
 	     */
+		eventStore: null,
 
 	    /**
 	     * @cfg {Boolean} hideHalfHourTimeSlotLabels Determines if the half-hour time slot labels are hidden in the Day View.
@@ -147,9 +148,23 @@ Ext.define('Ext.ux.TouchCalendarView', {
 
         cls: 'touch-calendar-view',
 
+		timeBlockCls: 'time-block',
+		timeBlockName: 'time-block',
         itemSelector: 'td.time-block'
 
     },
+
+	applyEventStore: function (value) {
+		if (typeof value === "string") {
+			value = Ext.getStore(value);
+		}
+		if (!(value instanceof Ext.data.Store)) {
+			throw "Value must be an instance of 'Ext.data.Store'!";
+			return null;
+		}
+		this.eventStore = value;
+		return value;
+	},
 
 	// default TimeSlot date templates that are merged with the supplied config
 	timeSlotDateTplsDefaults: {
@@ -251,18 +266,18 @@ Ext.define('Ext.ux.TouchCalendarView', {
    		},
 
    		/**
-   		 * Returns true if the specific index is at the end of the row
-   		 * Used to determine if a row terminating tag is needed
-   		 * @method
-   		 * @private
-   		 * @param {Number} currentIndex
-   		 * @return {Boolean}
-   		 */
-   		isEndOfRow: function(currentIndex){
-   			return (currentIndex % 7) === 0 && (currentIndex > 0);
-   		},
+		 * Returns true if the specific index is at the end of the row
+		 * Used to determine if a row terminating tag is needed
+		 * @method
+		 * @private
+		 * @param {Number} currentIndex
+		 * @return {Boolean}
+		 */
+		isEndOfRow: function(currentIndex){
+			return (currentIndex % 7) === 0 && (currentIndex > 0);
+		},
 
-   		/**
+		/**
    		 * Returns true if the specific index is at the start of the row.
    		 * USed to determine whether if a row opening tag is needed
    		 * @method
@@ -424,7 +439,6 @@ Ext.define('Ext.ux.TouchCalendarView', {
 	 * @param {String} viewMode Either 'month', 'week' or 'day'
 	 */
 	applyViewMode: function(viewMode){
-
 		viewMode = viewMode.toUpperCase();
 
         var viewModeFns = Ext.ux.TouchCalendarView[viewMode.toUpperCase()];
@@ -441,7 +455,7 @@ Ext.define('Ext.ux.TouchCalendarView', {
 
 		// Create the template
 		this.setTpl(new Ext.XTemplate((viewModeFns.tpl || this.getBaseTpl()).join(''), this.commonTemplateFunctions));
-		
+
 		this.setScrollable({
 			direction: viewMode.toUpperCase() === 'DAY' ? 'vertical' : false,
 			directionLock: true
@@ -459,7 +473,17 @@ Ext.define('Ext.ux.TouchCalendarView', {
 
         return data;
     },
-	
+
+	setCurrentDate: function(date) {
+		if (this.getCurrentDate() !== date) {
+			this.currentDate = date;
+			this.refresh();
+		}
+	},
+	getCurrentDate: function() {
+		return this.currentDate;
+	},
+
 	/**
 	 * Builds a collection of dates that need to be rendered in the current configuration
 	 * @method
@@ -469,7 +493,7 @@ Ext.define('Ext.ux.TouchCalendarView', {
 	populateStore: function(){
 		
 		this.currentDate = this.currentDate || this.value || new Date();
-		
+
 		var unselectable = true, // variable used to indicate whether a day is allowed to be selected
 			baseDate = this.currentDate, // date to use as base
 			iterDate = this.getStartDate(baseDate), // date current mode will start at
@@ -600,8 +624,9 @@ Ext.define('Ext.ux.TouchCalendarView', {
 		    if(newDate.getTime() !== previousValue.getTime()){
 	            this.setValue(newDate);
 
-	            this.fireEvent('selectionchange', this, newDate, previousValue);
+	            this.fireEvent('selectionchange', this, newDate, previousValue, e);
 		    }
+			this.fireEvent('timeslottap', this, newDate, previousValue, e);
 	    }
     },
 
@@ -749,6 +774,16 @@ Ext.define('Ext.ux.TouchCalendarView', {
 	},
 	
 	/**
+	 * Returns the cell representing the specified date
+	 * @method
+	 * @param {Ext.Element} date
+	 * @return {Ext.Element}
+	 */
+	getMonthCell: function(date){
+		var monthDate = new Date(date.getFullYear(), date.getMonth(), 1);
+		return this.element.select('td[datetime="' + this.getDateAttribute(monthDate) + '"]', this.element.dom).first();
+	},
+	/**
 	 * Returns a string format of the specified date
 	 * Used when assigning the datetime attribute to a table cell
 	 * @method
@@ -856,8 +891,6 @@ Ext.define('Ext.ux.TouchCalendarView', {
 			},
 
 			periodRowDayCount: 90,
-			periodMonthCount: 3,
-			numberOfEventsPerMonth: 4,
 
 			tpl: [
 				'<table class="{[this.me.getViewMode().toLowerCase()]}">',
@@ -871,18 +904,14 @@ Ext.define('Ext.ux.TouchCalendarView', {
 					'<tbody>',
 				'<tpl for=".">',
 					'<tpl if="xindex % 3 === 1">',
-						'<tr class="time-block-row quarter{[Math.floor(xindex / 3) + 1]}">',
+						'<tr class="time-block-row calendarrow quarter{[Math.floor(xindex / 3) + 1]}">',
 					'</tpl>',
-					'<td datetime="{[this.me.getDateAttribute(values.date)]}">',
+					'<td datetime="{[this.me.getDateAttribute(values.date)]}" class="{[this.me.getTimeBlockName()]} {[this.me.getTimeBlockCls()]}">',
 						'<table>',
 							'<thead>',
-								'<tr><th>{[Ext.Date.format(values.date, "M")]}</th></tr></tr>',
+								'<tr><th class="MonthTitleBar"><span class="MonthTitle">{[Ext.Date.format(values.date, "M")]}</span></th></tr></tr>',
 							'</thead>',
 							'<tbody>',
-								//'<tr><td>TEST-1</td></tr>',
-								//'<tr><td>TEST-2</td></tr>',
-								//'<tr><td>TEST-3</td></tr>',
-								//'<tr><td>TEST-4</td></tr>',
 							'</tbody>',
 						'</table>',
 					'</td>',

@@ -720,6 +720,9 @@ Ext.define('Ext.ux.TouchCalendarEvents', {
 
 		switch(viewMode.toLowerCase()){
 
+			case 'year':
+				processorCls = 'Ext.ux.TouchCalendarYearEvents';
+				break;
 			case 'month':
 				processorCls = 'Ext.ux.TouchCalendarMonthEvents';
 				break;

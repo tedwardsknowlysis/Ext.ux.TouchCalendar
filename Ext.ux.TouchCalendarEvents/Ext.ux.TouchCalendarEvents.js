@@ -22,6 +22,11 @@ Ext.define('Ext.ux.TouchCalendarEvents', {
 	extend: 'Ext.mixin.Observable',
 	config: {
 
+		/**
+		 * @cfg {Number} maxVisibleEvents Number of events that will be shown per view segment (day, month, week view)
+		 */
+		maxVisibleEvents: 4,
+
 		viewModeProcessor: null,
 
 		/**
@@ -241,6 +246,10 @@ Ext.define('Ext.ux.TouchCalendarEvents', {
 
 		switch(viewMode.toLowerCase()){
 
+			case 'year':
+				processorCls = 'Ext.ux.TouchCalendarYearEvents';
+				break;
+
 			case 'month':
 				processorCls = 'Ext.ux.TouchCalendarMonthEvents';
 				break;
@@ -453,7 +462,11 @@ Ext.define('Ext.ux.TouchCalendarEvents', {
             });
 
 	        if(this.getViewModeProcessor().eventBarStore){
-	            this.getViewModeProcessor().renderEventBars(this.getViewModeProcessor().eventBarStore);
+				if (this.calendar.getViewMode() === "YEAR") {
+					this.calendar.fireEvent('renderYearEvents', this.getViewModeProcessor().eventBarStore, this.getEventWrapperCls(), this.getEventsWrapperContainer(), this, this.calendar, this.getViewModeProcessor());
+				} else {
+					this.getViewModeProcessor().renderEventBars(this.getViewModeProcessor().eventBarStore);
+				}
 	        }
         } else {
           this.calendar.on('painted', this.createEventWrapper, this);
@@ -559,9 +572,9 @@ Ext.define('Ext.ux.TouchCalendarEvents', {
             this.eventBarStore = null;
         }
     
-    if(this.droppable){
-      this.droppable = null;
-    }
+		if(this.droppable){
+		  this.droppable = null;
+		}
     },
 
 	applyEventBarTpl: function(tpl){
@@ -605,31 +618,3 @@ Ext.define("Ext.ux.CalendarEventBarModel", {
 	}
 });
 
-///**
-// * @class Ext.util.Region
-// */
-//Ext.override(Ext.util.Region, {
-//  
-//});
-
-Ext.define('Ext.util.Region.partial', {
-  extend: 'Ext.util.Region',
-  /**
-   * Figures out if the Event Bar passed in is within the boundaries of the current Date Cell (this)
-   * @method
-   * @param {Object} region
-   */
-    partial: function(region){
-        var me = this, // cell
-      dragWidth = region.right - region.left,
-      dragHeight = region.bottom - region.top,
-      dropWidth = me.right - me.left,
-      dropHeight = me.bottom - me.top,
-       
-      verticalValid = region.top > me.top && region.top < me.bottom;
-              
-          horizontalValid = region.left > me.left && region.left < me.right;
-        
-        return horizontalValid && verticalValid;
-    }
-});

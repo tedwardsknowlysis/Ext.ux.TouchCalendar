@@ -32,26 +32,53 @@ var eventStore = Ext.create('Ext.data.Store', {
 	data: [
 		{
 			event: '1:05am - 3:05am',
-			title: 'Event 1',
+			title: 'Event 1-2',
 			start: new Date(year, 0, 1, 1, 5),
 			end: new Date(year, 0, 1, 3, 5),
 			css: 'red'
 		}, {
 			event: '4:00 - 4:10',
 			title: 'Event Name 3',
-			start: new Date(year, month, day, 4, 0),
-			end: new Date(year, month, day, 4, 10),
+			start: new Date(year, month-1, day, 4, 0),
+			end: new Date(year, month-1, day, 4, 10),
 			css: 'green'
 		}, {
 			event: '7:06 - 7:15',
-			title: 'Event Name 4',
-			start: new Date(year, month, day, 7, 6),
-			end: new Date(year, month, day, 7, 15),
+			title: 'Event Name 4-1',
+			start: new Date(year, month-1, day, 7, 6),
+			end: new Date(year, month-1, day, 7, 15),
 			css: 'blue'
 		}, {
+			event: '7:06 - 7:15',
+			title: 'Event Name 4-2',
+			start: new Date(year, month-1, day, 7, 6),
+			end: new Date(year, month-1, day, 7, 15),
+			css: 'blue'
+		},{
+			event: '7:06 - 7:15',
+			title: 'Event Name 4-3',
+			start: new Date(year, month-1, day, 7, 6),
+			end: new Date(year, month-1, day, 7, 15),
+			css: 'blue'
+		},
+		{
+			event: '7:06 - 7:15',
+			title: 'Event Name 4-4',
+			start: new Date(year, month-1, day, 7, 6),
+			end: new Date(year, month-1, day, 7, 15),
+			css: 'blue'
+		},
+		{
+			event: '7:06 - 7:15',
+			title: 'Event Name 4-5',
+			start: new Date(year, month-1, day, 7, 6),
+			end: new Date(year, month-1, day, 7, 15),
+			css: 'blue'
+		},
+		{
 			event: 'Jan - Nov',
 			title: 'Event Name 7',
-			start: new Date(year, month, day+2, 15, 0),
+			start: new Date(year, month-1, day+2, 15, 0),
 			end: new Date(year, month+10, day+2, 16, 10),
 			css: 'green'
 		}, {

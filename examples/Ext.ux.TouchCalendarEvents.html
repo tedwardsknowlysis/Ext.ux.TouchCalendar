@@ -6,8 +6,8 @@
         <script src="../lib/sencha/sencha-touch-all-debug.js" type="text/javascript">
         </script>
 
-        <link rel="stylesheet" type="text/css" href="../resources/css/Ext.ux.TouchCalendarView.css" media="all"/>
-        <link rel="stylesheet" type="text/css" href="../resources/css/skin1.css" media="all"/>
+        <link rel="stylesheet" type="text/css" href="../Ext.ux.TouchCalendarEvents/resources/css/Ext.ux.TouchCalendarView.css" media="all"/>
+        <link rel="stylesheet" type="text/css" href="../Ext.ux.TouchCalendarEventsresources/css/skin1.css" media="all"/>
         <style>
 
             .red
@@ -60,13 +60,9 @@
                             eventHeight: 'auto',
                             eventBarTpl: '<div class="longterm-calendar-event">' +
                                             '<div class="date">{start:date("d")}</div>' +
-                                            '<div class="brandcontainer">' +
-                                                '<span class="brand SAMbrand">SAM</span>' +
-                                                '<span class="namecontainer SAMbrand">' +
+                                            '<div>' +
                                                     '<span class="name">{title}</span>' +
-                                                '</span>' +
                                             '</div>' +
-                                            '<div class="status"></div>' +
                                         '</div>'
                         })]
                     });

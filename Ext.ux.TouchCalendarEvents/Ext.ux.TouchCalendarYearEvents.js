@@ -9,7 +9,7 @@ Ext.define('Ext.ux.TouchCalendarYearEvents', {
 
 	constructor: function() {
 		this.callParent(arguments);
-		//this.getCalendar().on('renderYearEvents', this.renderEventBars, this);
+		this.getCalendar().on('renderYearEvents', this.renderEventBars, this);
 	},
 
 	eventFilterFn: function(record, id, currentMonthBeginTime){

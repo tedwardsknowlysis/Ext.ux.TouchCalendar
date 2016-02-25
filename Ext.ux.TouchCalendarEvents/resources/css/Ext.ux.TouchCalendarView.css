@@ -118,7 +118,21 @@
   cursor: pointer;
 }
 /* line 147, ../scss/Ext.ux.TouchCalendar.scss */
-.touch-calendar-view thead th span {
+.touch-calendar-view thead th  span {
+  font-size: 9px;
+  font-weight: bold;
+  height: 13px;
+  overflow: hidden;
+  left: 14.5%;
+  position: absolute;
+  text-align: center;
+  width: 71%;
+  z-index: 100;
+  text-shadow: none;
+  top: 0;
+}
+/* line 147, ../scss/Ext.ux.TouchCalendar.scss */
+.touch-calendar-view thead th > span {
   font-size: 20px;
   font-weight: bold;
   height: 30px;
